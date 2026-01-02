@@ -1,7 +1,7 @@
 CREATE TABLE locations (
     Index_num BIGSERIAL NOT NULL,
     ID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    zip INT,
+    zip INT REFERENCES zipCodes(zip),
     down_lat FLOAT,
     left_long FLOAT,
     up_lat FLOAT,

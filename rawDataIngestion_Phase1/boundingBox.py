@@ -4,7 +4,7 @@ def find_bbox(data):
     rings = data["features"][0]["geometry"]["rings"]
 
     if not rings: 
-        return (None)
+        return None
     
     minLat = 90
     maxLat = -90
