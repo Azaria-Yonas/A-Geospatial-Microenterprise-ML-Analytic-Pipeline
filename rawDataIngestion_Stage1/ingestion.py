@@ -2,11 +2,6 @@ import asyncio
 import aiohttp
 import os
 
-from psql import coordinates.
-
-
-
-
 
 
 

@@ -2,7 +2,7 @@ import psycopg
 from . import DB_NAME, USERNAME, DB_KEY
 
 
-def insert_into_locations (zcta,bbox):
+def insert_location (zcta, bbox):
     with psycopg.connect(f"dbname={DB_NAME} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as cur:
             if bbox is (None): 

@@ -1,20 +1,18 @@
-import os
 import asyncio
 import aiohttp
 
 
-from zcta import get_zcta
 from boundingBox import find_bbox
-from insert import insertIntoLocations
+from psql.locations import insert_location
+from psql.zip_code_tabulation_area import get_zcta
 
-DB_NAME = "fifthrun"
-DB_KEY = os.getenv("dbKey")
-USER = os.getenv("psqlUser")
+
+
 url = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TAZ_UGA_ZCTA/MapServer/11/query?where=ZCTA5='{}'&returnGeometry=true&outSR=4326&f=pjson"
 
 
 
-zcta = get_zcta(DB_NAME,USER, DB_KEY)
+zcta = get_zcta()
 
 async def get_tasks (session, z):
     async with session.get(url.format(z), ssl=False) as session:
@@ -28,7 +26,7 @@ async def initialize_table():
 
         for z, response in results:
             bbox = find_bbox(response)
-            insertIntoLocations(z, bbox, DB_NAME, USER, DB_KEY)
+            insert_location(z, bbox)
 
 
 asyncio.run(initialize_table())
