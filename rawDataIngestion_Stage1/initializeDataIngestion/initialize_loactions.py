@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 
 
-from boundingBox import find_bbox
+from rawDataIngestion_Stage1.initializeDataIngestion.bounding_box import find_bbox
 from psql.locations import insert_location
 from psql.zip_code_tabulation_area import get_zcta
 
